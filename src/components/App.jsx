@@ -1,4 +1,4 @@
-import FeedBackStats from "./FeedBackStats";
+import FeedBackStats from './FeedBackStats';
 
 export const App = () => {
   return (
@@ -9,10 +9,16 @@ export const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
-        color: '#010101'
+        color: '#010101',
       }}
     >
-      <FeedBackStats/>
+      <FeedBackStats
+        good={0}
+        neutral={0}
+        bad={0}
+        total={0}
+        positivePercentage={0}
+      />
     </div>
   );
 };

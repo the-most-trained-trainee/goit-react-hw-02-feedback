@@ -1,10 +1,19 @@
 import React from 'react';
+import FeedbackOptions from './FeedbackOptions';
 
 class FeedBackStats extends React.Component {
-  state = {
+  static defaultProps = {
     good: 0,
     neutral: 0,
     bad: 0,
+    total: 0,
+    positivePercentage: 0,
+  };
+
+  state = {
+    good: this.props.good,
+    neutral: this.props.neutral,
+    bad: this.props.bad,
   };
 
   goodFeedbackIncrement = () => {
@@ -31,32 +40,28 @@ class FeedBackStats extends React.Component {
     });
   };
 
-  countTotalFeedback = () => Object.values(this.state).reduce((x, y) => x + y);
+  countTotalFeedback = () => {
+    const initialTotal = this.props.total;
+    const aggregateTotal = Object.values(this.state).reduce((x, y) => x + y);
+    return initialTotal + aggregateTotal;
+  };
 
-  countPositiveFeedbackPercentage = () =>
-    (this.state.good * 100) / Object.values(this.state).reduce((x, y) => x + y);
+  countPositiveFeedbackPercentage = () => {
+    return (
+      (this.state.good * 100) /
+      Object.values(this.state).reduce((x, y) => x + y)
+    );
+  };
 
   render() {
     return (
       <div>
         <h2>Please, leave feedback</h2>
-        <ul>
-          <li>
-            <button type="button" onClick={this.goodFeedbackIncrement}>
-              Good
-            </button>
-          </li>
-          <li>
-            <button type="button" onClick={this.neutralFeedbackIncrement}>
-              Neutral
-            </button>
-          </li>
-          <li>
-            <button type="button" onClick={this.badFeedbackIncrement}>
-              Bad
-            </button>
-          </li>
-        </ul>
+        <FeedbackOptions
+          goodFeedbackIncrement={this.goodFeedbackIncrement}
+          neutralFeedbackIncrement={this.neutralFeedbackIncrement}
+          badFeedbackIncrement={this.badFeedbackIncrement}
+        />
         <h2>Statistics</h2>
         <ul>
           <li>
@@ -73,10 +78,11 @@ class FeedBackStats extends React.Component {
           </li>
           <li>
             <span>
-              Positive Feedback{' '}
+              Positive Feedback
               {this.countTotalFeedback() === 0
                 ? 0
-                : this.countPositiveFeedbackPercentage()}
+                : this.countPositiveFeedbackPercentage()}{' '}
+              %
             </span>
           </li>
         </ul>
