@@ -1,6 +1,7 @@
 import React from 'react';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
+import Notification from './Notification';
 
 class FeedBackStats extends React.Component {
   goodFeedbackIncrement = () => {
@@ -24,16 +25,10 @@ class FeedBackStats extends React.Component {
   getFeedbacksSum = () =>
     Object.values(this.props.feedBackStatistic).reduce((x, y) => x + y);
 
-  countTotalFeedback = () => {
-    const initialTotal = this.props.total;
-    const aggregateTotal = this.getFeedbacksSum();
-    return initialTotal + aggregateTotal;
-  };
-
   countPositiveFeedbackPercentage = () => {
-    return (
+    return Math.round(
       (this.props.feedBackStatistic.goodFeedBacks * 100) /
-      this.getFeedbacksSum()
+        this.getFeedbacksSum()
     );
   };
 
@@ -48,10 +43,12 @@ class FeedBackStats extends React.Component {
           neutralFeedbackIncrement={this.neutralFeedbackIncrement}
           badFeedbackIncrement={this.badFeedbackIncrement}
         />
-
-        {isFeedbackGiven && (
+        <h2>Statistics</h2>
+        {!isFeedbackGiven ? (
+          <Notification message="There is no feedback" />
+        ) : (
           <Statistics
-            countTotalFeedback={this.countTotalFeedback}
+            countTotalFeedback={this.getFeedbacksSum}
             countPositiveFeedbackPercentage={
               this.countPositiveFeedbackPercentage
             }

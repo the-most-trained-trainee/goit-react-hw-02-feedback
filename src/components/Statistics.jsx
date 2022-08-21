@@ -1,9 +1,10 @@
-import React from 'react';
-
-const Statistics = ({countTotalFeedback, countPositiveFeedbackPercentage, feedBackStatistic}) => {
+const Statistics = ({
+  countTotalFeedback,
+  countPositiveFeedbackPercentage,
+  feedBackStatistic,
+}) => {
   return (
     <div>
-      <h2>Statistics</h2>
       <ul>
         <li>
           <span>Good {feedBackStatistic.goodFeedBacks}</span>
@@ -20,10 +21,7 @@ const Statistics = ({countTotalFeedback, countPositiveFeedbackPercentage, feedBa
         <li>
           <span>
             Positive Feedback
-            {countTotalFeedback() === 0
-              ? 0
-              : countPositiveFeedbackPercentage()}{' '}
-            %
+            {countPositiveFeedbackPercentage()} %
           </span>
         </li>
       </ul>
