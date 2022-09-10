@@ -1,7 +1,13 @@
 import React from 'react';
+import StyledButtonsPanel from './FeedbackOptionsStyled';
+import PropTypes from 'prop-types';
 
-const FeedbackOptions = ({goodFeedbackIncrement, neutralFeedbackIncrement, badFeedbackIncrement}) => (
-  <ul>
+const FeedbackOptions = ({
+  goodFeedbackIncrement,
+  neutralFeedbackIncrement,
+  badFeedbackIncrement,
+}) => (
+  <StyledButtonsPanel>
     <li>
       <button type="button" onClick={goodFeedbackIncrement}>
         Good
@@ -16,9 +22,14 @@ const FeedbackOptions = ({goodFeedbackIncrement, neutralFeedbackIncrement, badFe
       <button type="button" onClick={badFeedbackIncrement}>
         Bad
       </button>
-  
     </li>
-  </ul>
+  </StyledButtonsPanel>
 );
+
+FeedbackOptions.propTypes = {
+  goodFeedbackIncrement: PropTypes.func.isRequired,
+  neutralFeedbackIncrement: PropTypes.func.isRequired,
+  badFeedbackIncrement: PropTypes.func.isRequired,
+};
 
 export default FeedbackOptions;

@@ -1,32 +1,46 @@
+import PropTypes from 'prop-types';
+import StyledStatistics from './StatisticsStyled';
+
 const Statistics = ({
   countTotalFeedback,
   countPositiveFeedbackPercentage,
   feedBackStatistic,
 }) => {
   return (
-    <div>
+    <StyledStatistics>
       <ul>
         <li>
-          <span>Good {feedBackStatistic.goodFeedBacks}</span>
+          <span>Good </span>
+          <span>{feedBackStatistic.goodFeedBacks}</span>
         </li>
         <li>
-          <span>Neutral {feedBackStatistic.neutralFeedBacks}</span>
+          <span>Neutral </span>
+          <span>{feedBackStatistic.neutralFeedBacks}</span>
         </li>
         <li>
-          <span> Bad {feedBackStatistic.badFeedBacks}</span>
+          <span>Bad </span> <span>{feedBackStatistic.badFeedBacks}</span>
         </li>
         <li>
-          <span>Total {countTotalFeedback()}</span>
+          <span>Total </span>
+          <span>{countTotalFeedback()}</span>
         </li>
         <li>
-          <span>
-            Positive Feedback
-            {countPositiveFeedbackPercentage()} %
-          </span>
+          <span>Positive Feedback(%) </span>
+          <span>{countPositiveFeedbackPercentage()}</span>
         </li>
       </ul>
-    </div>
+    </StyledStatistics>
   );
+};
+
+Statistics.propTypes = {
+  countTotalFeedback: PropTypes.func.isRequired,
+  countPositiveFeedbackPercentage: PropTypes.func.isRequired,
+  feedBackStatistic: PropTypes.shape({
+    goodFeedBacks: PropTypes.number.isRequired,
+    neutralFeedBacks: PropTypes.number.isRequired,
+    badFeedBacks: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default Statistics;

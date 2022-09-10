@@ -1,5 +1,6 @@
 import React from 'react';
 import FeedBackStats from './FeedBackStats';
+import Container from './AppStyled';
 
 class App extends React.Component {
   defaultData = {
@@ -22,23 +23,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
+      <Container>
         <FeedBackStats
           feedBackStatistic={this.state}
           total={this.total}
           positivePercentage={this.positivePercentage}
           stateUpdate={this.stateUpdate}
         />
-      </div>
+      </Container>
     );
   }
 }

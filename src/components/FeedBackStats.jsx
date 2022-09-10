@@ -2,6 +2,8 @@ import React from 'react';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 import Notification from './Notification';
+import FeeBackStats from './FeedBackStatsStyled';
+import PropTypes from 'prop-types';
 
 class FeedBackStats extends React.Component {
   goodFeedbackIncrement = () => {
@@ -36,7 +38,7 @@ class FeedBackStats extends React.Component {
     const isFeedbackGiven = this.getFeedbacksSum() !== 0;
 
     return (
-      <div>
+      <FeeBackStats>
         <h2>Please, leave feedback</h2>
         <FeedbackOptions
           goodFeedbackIncrement={this.goodFeedbackIncrement}
@@ -55,9 +57,20 @@ class FeedBackStats extends React.Component {
             feedBackStatistic={this.props.feedBackStatistic}
           />
         )}
-      </div>
+      </FeeBackStats>
     );
   }
 }
+
+FeedBackStats.propTypes = {
+  feedBackStatistic: PropTypes.shape({
+    goodFeedBacks: PropTypes.number.isRequired,
+    neutralFeedBacks: PropTypes.number.isRequired,
+    badFeedBacks: PropTypes.number.isRequired,
+  }).isRequired,
+  total: PropTypes.number,
+  positivePercentage: PropTypes.number,
+  stateUpdate: PropTypes.func.isRequired,
+};
 
 export default FeedBackStats;
