@@ -11,9 +11,10 @@ class App extends React.Component {
     bad: 0,
   };
 
-  feedbackSubmit = data => {
-    this.setState(data);
-  };
+  feedbackSubmit = data =>
+    this.setState(prevState => {
+      return { [data]: (prevState[data] += 1) };
+    });
 
   countaTotal = () => Object.values(this.state).reduce((x, y) => x + y);
 
@@ -25,7 +26,7 @@ class App extends React.Component {
       <div>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={this.state}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.feedbackSubmit}
           />
         </Section>

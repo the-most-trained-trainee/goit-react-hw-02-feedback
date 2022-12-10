@@ -9,6 +9,7 @@ const StyledSection = styled.section`
   padding: 10px;
   margin-left: 10px;
   margin-right: 10px;
+  text-transform: capitalize;
 }
 `;
 
